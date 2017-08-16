@@ -1,6 +1,7 @@
 var config = {
     debug: true,
-    AppName: '码聊测试版 0.0.1', //项目名字
+    AppName: 'Mr.Adam IM', //项目名字
+    Version:'0.0.1',//版本
     description: '在线聊天系统', //项目的描述
     keywords: 'nodejs, express, connect, socket.io',//项目的关键字
     listen:9000,

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+	<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/css/layui.mobile.css">
+	<style>
+		body{
+			padding: 0;
+			margin: 0;
+			background: #eee;
+			/*font-family: "微软雅黑",sans-serif;*/
+		}
+		.layim-panel{
+			height:50px;
+			background: #36373c;
+			padding: 0 15px;
+		}
+		.layim-panel p{
+			line-height: 50px;
+			font-size:18px;
+			color:#fff;
+		}
+		.layim-body{
+			font-size:18px;
+			padding: 50px 25vw;
+			text-align: center;
+		}
+		#headimg{
+			width:20vw;
+			border-radius: 50%;
+			border:2px solid #ff7700;
+		}
+		#sub_btn{
+			margin-top:20px;
+			text-align: center;
+			height:50px;
+			display:block;
+			width:100%;
+			background: #fff;
+			border:1px solid #f70;
+			border-radius:19px;
+		}
+		#sub_btn:active{
+			background: #f70;
+			border:1px solid #fff;
+		}
+		.input:focus {
+			border:1px solid #f70;
+			height:48px;
+		}
+		.input{
+			border:none;
+			height:50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="layim-panel">
+		<p><%= title %> Register</p>
+	</div>
+	<div class="layim-body">
+		<img src="<%= headimg %>" id="headimg">
+		<form action="/register" method="post" onsubmit="return sub()">
+			<input type="text" class="input" id="nick_name" name="nick_name" style="border-radius:20px;margin-top:20px;line-height;50px;color:#888;text-align: center;width:100%;" placeholder="Your name">
+			<input type="hidden" name="headimg" value="<%= headimg %>">
+			<input type="text" class="input" id="motto" name="motto" style="border-radius:20px;margin-top:20px;line-height;50px;color:#888;text-align: center;width:100%;" placeholder="Your motto">
+			<button id="sub_btn" type="submit">Sign In</button>
+		</form>
+	</div>
+</body>
+<script>
+function sub(){
+	var nick_name = getId("nick_name").value;
+	var motto = getId("motto").value;
+	if(!nick_name){
+		alert("请填写您的名字");
+		return false;
+	}
+	if(nick_name.length > 10){
+		alert("名称不能超过10个字");
+		return false;
+	}
+	if(motto.length > 50){
+		alert("个人介绍不能超过50个字");
+		return false;
+	}
+	return true;
+}
+
+function getId($id){
+	return document.getElementById($id);
+}
+</script>
+</html>
