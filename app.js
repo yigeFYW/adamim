@@ -70,10 +70,9 @@ app.use("/",router);
 
 io.on("connection",function(socket){
     //对于没有认证的不做任何事情
-    var sid = socket.id;
-    socket_list[sid] = socket;
-
-
+    socket_list[socket.id] = socket;
+    
+    
 
 
 
