@@ -179,12 +179,17 @@ layui.config({
 
         //监听收到来自好友的消息
         socket.on("friendsendmsg",function(msg){
-
+            layim.getMessage(msg);
         });
 
         //监听收到来自群组的消息
         socket.on("groupsendmsg",function(msg){
 
+        });
+
+        //监听服务端提示信息
+        socket.on("toast",function(msg){
+            layer.msg(msg);
         });
 
         //监听发送消息
@@ -200,27 +205,27 @@ layui.config({
             }
 
             //演示自动回复
-            setTimeout(function(){
-                var obj = {};
-                if(To.type === 'group'){
-                    obj = {
-                        username: '模拟群员'+(Math.random()*100|0)
-                        ,avatar: layui.cache.dir + 'images/face/'+ (Math.random()*72|0) + '.gif'
-                        ,id: To.id
-                        ,type: 'group'
-                        ,content: autoReplay[Math.random()*9|0]
-                    }
-                } else {
-                    obj = {
-                        username: To.name
-                        ,avatar: To.avatar
-                        ,id: To.id
-                        ,type: To.type
-                        ,content: autoReplay[Math.random()*9|0]
-                    }
-                }
-                layim.getMessage(obj);
-            }, 3000);
+//            setTimeout(function(){
+//                var obj = {};
+//                if(To.type === 'group'){
+//                    obj = {
+//                        username: '模拟群员'+(Math.random()*100|0)
+//                        ,avatar: layui.cache.dir + 'images/face/'+ (Math.random()*72|0) + '.gif'
+//                        ,id: To.id
+//                        ,type: 'group'
+//                        ,content: autoReplay[Math.random()*9|0]
+//                    }
+//                } else {
+//                    obj = {
+//                        username: To.name
+//                        ,avatar: To.avatar
+//                        ,id: To.id
+//                        ,type: To.type
+//                        ,content: autoReplay[Math.random()*9|0]
+//                    }
+//                }
+//                layim.getMessage(obj);
+//            }, 3000);
         });
     });
 

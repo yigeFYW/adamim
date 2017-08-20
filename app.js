@@ -84,10 +84,6 @@ app.use("/",router);
 io.on("connection",function(socket){
     //对于没有认证的不做任何事情
     socket_list[socket.id] = socket;
-    
-    console.log(socket.id);
-
-
     socket.on('init', function (data, back) {
         //data.sid   data.nick_name    data.headimg   data.motto    data.user_id
         socket_list[socket.id].nick_name = data.nick_name;
@@ -149,9 +145,8 @@ io.on("connection",function(socket){
 
     //监听用户发送消息
     socket.on("getOneMsg",function(msg){
-        console.log(msg);
         /*
-         obj = {
+         var obj = {
              username: To.name
              ,avatar: To.avatar
              ,id: To.id
@@ -159,12 +154,30 @@ io.on("connection",function(socket){
              ,content: autoReplay[Math.random()*9|0]
          }
         */
-
+        var my = msg.to;
+        var to = msg.mine;
+        //判断接收消息方是否上线
+        if(my.status == "offline"){
+            //没上线   提示用户该用户没上线
+            var d = "该用户没上线,收不到该信息";
+            socket.emit("toast",d);
+        }else{
+            obj = {
+                username:to.username,
+                avatar:to.avatar,
+                id:to.id,
+                type:"friend",
+                content:to.content
+            };
+            //发送信息
+            //console.log(socket_list[user_list[my.id]]);
+            socket_list[user_list[my.id]].emit("friendsendmsg",obj);
+        }
     });
 
     //监听用户发送群组消息
     socket.on("getOneGroupMsg",function(msg){
-        console.log(msg);
+
     });
 
     //监听下线事件
@@ -189,6 +202,7 @@ io.on("connection",function(socket){
         //将用户从user_list中移除
         delete user_list[socket_list[socket.id].user_id];
         delete socket_list[socket.id];//删除用户
+        test();
     });
 
 
@@ -254,4 +268,12 @@ function getNotOnline(callback){
 //返回群组的信息
 function getOnlineGroup(){
 
+}
+
+function test(){
+    var num = 0;
+    for(var i in user_list){
+        num ++;
+    }
+    console.log(num);
 }
