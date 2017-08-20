@@ -4,7 +4,7 @@ var config = {
     Version:'0.0.1',//版本
     description: '在线聊天系统', //项目的描述
     keywords: 'nodejs, express, connect, socket.io',//项目的关键字
-    listen:9000,
+    listen:8000,
     database:{
         mysql:{
             host:"",
