@@ -198,11 +198,11 @@ io.on("connection",function(socket){
             };
             socket.broadcast.emit('someoneOffline',d);
         });
-
+        console.log("a parson is");
         //将用户从user_list中移除
         delete user_list[socket_list[socket.id].user_id];
         delete socket_list[socket.id];//删除用户
-        test();
+        //test();
     });
 
 
